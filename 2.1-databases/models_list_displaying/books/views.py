@@ -1,4 +1,6 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render
+
 
 
 def books_view(request):
