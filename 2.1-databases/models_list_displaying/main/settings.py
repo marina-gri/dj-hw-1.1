@@ -54,7 +54,7 @@ MIDDLEWARE = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hoba',
+        'NAME': 'netology_import_books',
         'USER': 'postgres',
         'PASSWORD': '123456',
         'HOST': '127.0.0.1',
