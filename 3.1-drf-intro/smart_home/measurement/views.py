@@ -1,5 +1,4 @@
-from django.core.serializers import serialize
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, CreateAPIView, ListAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
@@ -29,7 +28,13 @@ class MeasurementsViewSet(ViewSet):
     # добавление измерения
     def create(self, request):
         new_data = request.data
-        queryset = Measurement.objects.create(sensor_id=new_data['sensor'], temperature=new_data['temperature'])
+
+        queryset = Measurement.objects.create(
+            sensor_id=new_data['sensor'],
+            temperature=new_data['temperature'],
+            image=new_data.get('image')
+        )
+
         queryset.save()
         serializer = MeasurementSerializer(queryset)
         return Response(serializer.data)
