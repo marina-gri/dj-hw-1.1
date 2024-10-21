@@ -34,21 +34,21 @@ POST {{baseUrl}}/measurements/
 Content-Type: application/json
 
 {
-  "sensor": 19,
+  "sensor": 1,
   "temperature": 22.3
 }
 
 ###
 
 # получение информации по датчику
-GET {{baseUrl}}/sensors/1/
+GET {{baseUrl}}/sensors/20/
 Content-Type: application/json
 
 
 ###
 
 # получение измерений
-GET {{baseUrl}}/measurements/
+GET {{baseUrl}}/measurements_list/
 Content-Type: application/json
 
 
@@ -59,7 +59,7 @@ POST {{baseUrl}}/measurements/
 Content-Type: application/json
 
 {
-  "sensor": 19,
+  "sensor": 1,
   "temperature": 22.3,
   "image": ""
 }

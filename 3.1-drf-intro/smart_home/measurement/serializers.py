@@ -6,15 +6,20 @@ from .models import Sensor, Measurement
 
 
 class SensorSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Sensor
         fields = ['id', 'name', 'description']
 
 
-
 class MeasurementSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url=True, required=False, max_length=None)
+    image = serializers.ImageField(required=False, max_length=None)
+    class Meta:
+        model = Measurement
+        fields = ['sensor', 'temperature', 'created_at', 'image']
+
+
+class MeasurementDetailSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(required=False, max_length=None)
     class Meta:
         model = Measurement
         fields = ['temperature', 'created_at', 'image']
@@ -22,7 +27,7 @@ class MeasurementSerializer(serializers.ModelSerializer):
 
     #cписок измерений
 class SensorDetailSerializer(serializers.ModelSerializer):
-    measurements = MeasurementSerializer(read_only=True, many=True)
+    measurements = MeasurementDetailSerializer(read_only=True, many=True)
     class Meta:
         model = Sensor
         fields = ['id', 'name', 'description', 'measurements']

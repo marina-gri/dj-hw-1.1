@@ -1,4 +1,4 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, CreateAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
@@ -18,24 +18,13 @@ class SensorUpdateView(RetrieveUpdateAPIView):
     serializer_class = SensorDetailSerializer
 
 
-class MeasurementsViewSet(ViewSet):
-    # получение списка измерений
-    def list(self, request):
-        queryset = Sensor.objects.all()
-        serializer = SensorDetailSerializer(queryset, many=True)
-        return Response(serializer.data)
+# добавление измерения
+class MeasurementsCreateViewSet(CreateAPIView):
+    queryset = Measurement.objects.all()
+    serializer_class = MeasurementSerializer
 
-    # добавление измерения
-    def create(self, request):
-        new_data = request.data
 
-        queryset = Measurement.objects.create(
-            sensor_id=new_data['sensor'],
-            temperature=new_data['temperature'],
-            image=new_data.get('image')
-        )
-
-        queryset.save()
-        serializer = MeasurementSerializer(queryset)
-        return Response(serializer.data)
-
+# получение списка измерений
+class MeasurementsListViewSet(ListAPIView):
+    queryset = Sensor.objects.all()
+    serializer_class = SensorDetailSerializer
